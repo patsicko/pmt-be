@@ -9,15 +9,15 @@ export class EmailService {
     this.transporter = nodemailer.createTransport({
       service: 'Gmail', 
       auth: {
-        user: 'patsicko@gmail.com',
-        pass: 'ijbfxuhcokuvhecq',
+        user: process.env.senderEmail,
+        pass: process.env.senderPassword,
       },
     });
   }
 
   async sendCourseCreatedEmail(userName:string,userEmail: string, courseLink: string) {
     const mailOptions = {
-      from: 'patsicko@gmail.com',
+      from: process.env.senderEmail,
       to: userEmail,
       subject: 'New Course Created',
       html: `

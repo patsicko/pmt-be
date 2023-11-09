@@ -45,7 +45,7 @@ export class CourseController {
     const phone= allPhones[i]
 
     const message = `Dear ${userName} we wanted to let you know that a new course has been created`;
-      // await this.smsService.sendSms(phone, message);
+      await this.smsService.sendSms(phone, message);
     const courseLink = `http://localhost:8000/api/courses/${newCourse.id}`;
     await this.emailService.sendCourseCreatedEmail(userName,userEmail, courseLink);
   }

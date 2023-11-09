@@ -15,6 +15,13 @@ import { SmsService } from './sms/sms.service';
 import { SmsModule } from './sms/sms.module';
 import { AdminSeederProvider } from './user/admin-seeder.provider';
 
+import * as dotenv from 'dotenv';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConfig } from './user/jwt.config';
+dotenv.config();
+
+console.log('Postgres URL:', process.env.postgresURL);
+
 
 @Module({
   imports: [
@@ -22,17 +29,15 @@ import { AdminSeederProvider } from './user/admin-seeder.provider';
       envFilePath:'.env', 
       isGlobal:true
     }),
+    JwtModule.register(jwtConfig),
     // MongooseModule.forRoot('mongodb+srv://patsicko:cZdht6dn3r8U2unO@cluster0.kaocuji.mongodb.net/pmsdb?retryWrites=true&w=majority'),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'test',
+      type: 'postgres',
+      url:process.env.postgresURL,
       entities: ["dist/**/*.entity.js"],
       autoLoadEntities:true,
       synchronize: true,
+      ssl: true
     }),
   ProductModule,
   CourseModule,

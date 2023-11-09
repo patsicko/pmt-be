@@ -14,7 +14,7 @@ export const AdminSeederProvider: Provider = {
       const adminUserDto = {
         firstName: 'Admin',
         lastName: 'Admin',
-        phone:'+250',
+        phone:'+2507',
         email: 'admin@gmail.com',
         role:'admin',
         password: '123',

@@ -8,14 +8,15 @@ export class SmsService {
   private client: any;
 
   constructor() {
-    this.client = new twilio('ACf94fa7c31a83e777ecbcbacc55627d37', '517980b716b73713bf7553086d34584f');
+    this.client = new twilio( process.env.TWILIO_ACCOUNT_SID,
+      process.env.TWILIO_AUTH_TOKEN,);
   }
 
   async sendSms(to: string, message: string): Promise<void> {
     try {
       await this.client.messages.create({
         to,
-        from: '+19725841583',
+        from:process.env.TWILIO_PHONE_NUMBER,
         body: message,
       });
     } catch (error) {
